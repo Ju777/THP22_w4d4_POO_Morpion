@@ -9,12 +9,19 @@ class Application
       name_player1 = get_player_name(1)
       name_player2 = get_player_name(2)
 
-      # Création d'une nouvelle partie
-      @current_game = Game.new(name_player1, name_player2)
-      puts "                UNE NOUVELLE PARTIE COMMENCE !"
-      puts "[ENTER]"
-      self.start_rounds
-      gets
+      # Boucle infinie qui relance une nouvelle partie après chaque victoire ou match nul
+      while true
+        # Création d'une nouvelle partie
+        @current_game = Game.new(name_player1, name_player2)
+        puts "                UNE NOUVELLE PARTIE COMMENCE !"
+        puts "[ENTER]"
+        gets
+        round = 1
+        while @current_game.status == true
+          @current_game.play_round(round)
+          round += 1
+        end
+      end
 
     elsif @player_will == "n"
       good_bye_message
@@ -23,7 +30,6 @@ class Application
 
   # Méthode qui souhaite la bienvenue
   def welcome_message
-
     puts "\n\n                **********************************************"
     puts "                **                                          **"
     puts "                ***     "+"UN MORPION CA GRATTOUILLE ET".light_blue+"      ****"
@@ -38,7 +44,7 @@ class Application
     puts "               | 2 joueurs placent un pion sur la grille chacun leur tour."
     puts "               | Le gagnant est celui qui aligne 3 pions le premier."
     puts "               |"
-    puts "               | BONNE CHANCE !  :)"
+    puts "               | BONNE CHANCE !  "+":)".red
     puts "               |"
     puts "\n[ENTER]"
     gets
@@ -73,14 +79,5 @@ class Application
   def get_player_name(player_num)
     print "                Nom du joueur #{player_num} > "
     return gets.chomp
-  end
-
-  # Méthode qui lance le premier tour de morpion
-  def start_rounds
-    round = 1
-    while self.current_game.status == true
-      self.current_game.play_round(round)
-      round += 1
-    end
   end
 end

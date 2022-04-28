@@ -93,7 +93,7 @@ class Game
   def ligneA?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a1" || last_boardcase_updated == "a2" || last_boardcase_updated == "a3") && (@board.board_hash["a1"] == @board.board_hash["a2"] && @board.board_hash["a1"] == @board.board_hash["a3"])
       puts "                  "+"~"*40
-      puts "                     #{player.name} A GAGNÉ ! => LIGNE A ALIGNÉE" 
+      puts "                     "+"#{player.name} A GAGNÉ !".light_blue+" => LIGNE A ALIGNÉE" 
       puts "                  "+"~"*40
       puts "\n[ENTER]"
       gets
@@ -107,7 +107,7 @@ class Game
   def ligneB?(last_boardcase_updated, player)
     if (last_boardcase_updated == "b1" || last_boardcase_updated == "b2" || last_boardcase_updated == "b3") && (@board.board_hash["b1"] == @board.board_hash["b2"] && @board.board_hash["b1"] == @board.board_hash["b3"])
       puts "                  "+"~"*40
-      puts "                     #{player.name} A GAGNÉ ! => LIGNE B ALIGNÉE" 
+      puts "                     "+"#{player.name} A GAGNÉ !".light_blue+" => LIGNE B ALIGNÉE" 
       puts "                  "+"~"*40
       puts "\n[ENTER]"
       gets
@@ -121,7 +121,7 @@ class Game
   def ligneC?(last_boardcase_updated, player)
     if (last_boardcase_updated == "c1" || last_boardcase_updated == "c2" || last_boardcase_updated == "c3") && (@board.board_hash["c1"] == @board.board_hash["c2"] && @board.board_hash["c1"] == @board.board_hash["c3"])
         puts "                  "+"~"*40
-        puts "                     #{player.name} A GAGNÉ ! => LIGNE C ALIGNÉE" 
+        puts "                     "+"#{player.name} A GAGNÉ !".light_blue+" => LIGNE C ALIGNÉE" 
         puts "                  "+"~"*40
         puts "\n[ENTER]"
         gets
@@ -135,7 +135,7 @@ class Game
   def ligne1?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a1" || last_boardcase_updated == "b1" || last_boardcase_updated == "c1") && (@board.board_hash["a1"] == @board.board_hash["b1"] && @board.board_hash["a1"] == @board.board_hash["c1"])
         puts "                  "+"~"*40
-        puts "                     #{player.name} A GAGNÉ ! => COLONNE 1 ALIGNÉE" 
+        puts "                     "+"#{player.name} A GAGNÉ !".light_blue+" => COLONNE 1 ALIGNÉE" 
         puts "                  "+"~"*40
         puts "\n[ENTER]"
         gets
@@ -149,7 +149,7 @@ class Game
   def ligne2?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a2" || last_boardcase_updated == "b2" || last_boardcase_updated == "c2") && (@board.board_hash["a2"] == @board.board_hash["b2"] && @board.board_hash["a2"] == @board.board_hash["c2"])
         puts "                  "+"~"*40
-        puts "                     #{player.name} A GAGNÉ ! => COLONNE 2 ALIGNÉE" 
+        puts "                     "+"#{player.name} A GAGNÉ !".light_blue+" => COLONNE 2 ALIGNÉE" 
         puts "                  "+"~"*40
         puts "\n[ENTER]"
         gets
@@ -163,7 +163,7 @@ class Game
   def ligne3?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a3" || last_boardcase_updated == "b3" || last_boardcase_updated == "c3") && (@board.board_hash["a3"] == @board.board_hash["b3"] && @board.board_hash["a3"] == @board.board_hash["c3"])
         puts "                  "+"~"*40
-        puts "                     #{player.name} A GAGNÉ ! => COLONNE 3 ALIGNÉE" 
+        puts "                     "+"#{player.name} A GAGNÉ !".light_blue+" => COLONNE 3 ALIGNÉE" 
         puts "                  "+"~"*40
         puts "\n[ENTER]"
         gets
@@ -176,9 +176,9 @@ class Game
   # 7
   def ligneA1?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a1" || last_boardcase_updated == "b2" || last_boardcase_updated == "c3") && (@board.board_hash["a1"] == @board.board_hash["b2"] && @board.board_hash["a1"] == @board.board_hash["c3"])
-        puts "                  "+"~"*40
-        puts "                     #{player.name} A GAGNÉ ! => DIAGONALE A1-C3 ALIGNÉE" 
-        puts "                  "+"~"*40
+        puts "                  "+"~"*48
+        puts "                      "+"#{player.name} A GAGNÉ !".light_blue+" => DIAGONALE A1-C3 ALIGNÉE" 
+        puts "                  "+"~"*48
         puts "\n[ENTER]"
         gets
         return true
@@ -190,9 +190,9 @@ class Game
   # 8
   def ligneC1?(last_boardcase_updated, player)
     if (last_boardcase_updated == "c1" || last_boardcase_updated == "b2" || last_boardcase_updated == "a3") && (@board.board_hash["c1"] == @board.board_hash["b2"] && @board.board_hash["c1"] == @board.board_hash["a3"])
-        puts "                  "+"~"*40
-        puts "                     #{player.name} A GAGNÉ ! => DIAGONALE C1-A3 ALIGNÉE" 
-        puts "                  "+"~"*40
+        puts "                  "+"~"*48
+        puts "                      "+"#{player.name} A GAGNÉ !".light_blue+" => DIAGONALE C1-A3 ALIGNÉE" 
+        puts "                  "+"~"*48
         puts "\n[ENTER]"
         gets
         return true
