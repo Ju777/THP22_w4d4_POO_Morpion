@@ -18,44 +18,48 @@ class Game
     Show.new(@board)
 
       player_to_play = who_s_turn(round)
-      print " Choisis un case > "
+      print " > "
       chosen_boardcase = gets.chomp
 
       # Est-ce une saisie valide ? Si oui, est-ce une case libre ?
       while !bordcase_valid?(chosen_boardcase) || !@board.boardcase_status?(chosen_boardcase)
         Show.new(@board)
-        print "Ré-essaie > "
-        chosen_boardcase = gets.chomp
+        print "=> #{chosen_boardcase} est invalide > "
+        chosen_boardcase = gets.chomp 
         #@board.boardcase_status?(chosen_boardcase) if bordcase_valid?(chosen_boardcase)
       end 
       
-      # Mise à jour de la case avec une 'X' ou un 'O'
+      # Mise à jour de la case avec une 'X' pour le joueur 1 ou un 'O' pour le joueur 2
       @board.board_update(chosen_boardcase, 1) if player_to_play == 1
       @board.board_update(chosen_boardcase, 2) if player_to_play == 2
 
+      # Affichage du plateau mis à jour
+      Show.new(@board)
+      
       # Y'a-t-il un vainqueur ? Si oui => fin de partie
-      victory = winner?(chosen_boardcase)
+      
+      victory = winner?(chosen_boardcase, player1) if player_to_play == 1
+      victory = winner?(chosen_boardcase, player2) if player_to_play == 2
 
       if victory == true
         @status = false
-        puts "@status devient false"
       elsif victory == false && round == 9
-        puts "MATCH NUL !"
+        puts "=> MATCH NUL !"
         @status = false
-        puts "@status devient false"
       end
+      round += 1
   end
 
-  # Méthode qui indique quel joueur doit jouer
+  # Méthode qui annonce quel joueur doit jouer
   def who_s_turn(round)
     player1 = @players_array[0]
     player2 = @players_array[1]
 
     if round.even?
-      print " * #{player2.name} *"
+      print "=> A toi #{player2.name}"
       return 2
     else
-      print " * #{player1.name} *"
+      print "=> A toi #{player1.name}"
       return 1
     end
   end
@@ -64,35 +68,35 @@ class Game
   def bordcase_valid?(chosen_boardcase)
     valids_boardcases = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
     if valids_boardcases.include?(chosen_boardcase)
-      puts "saisie valide"
-      gets
       return true 
     else
-      puts "saisie non valide"
-      gets
+      #puts "saisie non valide"
+      #gets
       return false
     end
   end
 
   # Méthode qui vérifie s'il y a un gagnant après qu'un joueur ait choisi une case
-  def winner?(last_boardcase_updated)
-    return true if ligneA?(last_boardcase_updated)  
-    return true if ligneB?(last_boardcase_updated)
-    return true if ligneC?(last_boardcase_updated)
-    return true if ligne1?(last_boardcase_updated)
-    return true if ligne2?(last_boardcase_updated)
-    return true if ligne3?(last_boardcase_updated)
-    return true if ligneA1?(last_boardcase_updated)
-    return true if ligneC1?(last_boardcase_updated)
+  def winner?(last_boardcase_updated, player)
+    return true if ligneA?(last_boardcase_updated, player)  
+    return true if ligneB?(last_boardcase_updated, player)
+    return true if ligneC?(last_boardcase_updated, player)
+    return true if ligne1?(last_boardcase_updated, player)
+    return true if ligne2?(last_boardcase_updated, player)
+    return true if ligne3?(last_boardcase_updated, player)
+    return true if ligneA1?(last_boardcase_updated, player)
+    return true if ligneC1?(last_boardcase_updated, player)
     return false
   end
 
   # Les 8 méthodes qui suivent vérifient si 3 pions sont alignés horizontalement, verticalement et en digaonale
   # 1
-  def ligneA?(last_boardcase_updated)
+  def ligneA?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a1" || last_boardcase_updated == "a2" || last_boardcase_updated == "a3") && (@board.board_hash["a1"] == @board.board_hash["a2"] && @board.board_hash["a1"] == @board.board_hash["a3"])
-      puts "GAGNÉ ! LIGNE A" 
-      puts "[ENTER]"
+      puts "                  "+"~"*40
+      puts "                     #{player.name} A GAGNÉ ! => LIGNE A ALIGNÉE" 
+      puts "                  "+"~"*40
+      puts "\n[ENTER]"
       gets
       return true
     else
@@ -101,10 +105,12 @@ class Game
   end
 
   # 2
-  def ligneB?(last_boardcase_updated)
+  def ligneB?(last_boardcase_updated, player)
     if (last_boardcase_updated == "b1" || last_boardcase_updated == "b2" || last_boardcase_updated == "b3") && (@board.board_hash["b1"] == @board.board_hash["b2"] && @board.board_hash["b1"] == @board.board_hash["b3"])
-      puts "GAGNÉ ! LIGNE B" 
-      puts "[ENTER]"
+      puts "                  "+"~"*40
+      puts "                     #{player.name} A GAGNÉ ! => LIGNE B ALIGNÉE" 
+      puts "                  "+"~"*40
+      puts "\n[ENTER]"
       gets
       return true
     else
@@ -113,10 +119,12 @@ class Game
   end
   
   # 3
-  def ligneC?(last_boardcase_updated)
+  def ligneC?(last_boardcase_updated, player)
     if (last_boardcase_updated == "c1" || last_boardcase_updated == "c2" || last_boardcase_updated == "c3") && (@board.board_hash["c1"] == @board.board_hash["c2"] && @board.board_hash["c1"] == @board.board_hash["c3"])
-        puts "GAGNÉ ! LIGNE C" 
-        puts "[ENTER]"
+        puts "                  "+"~"*40
+        puts "                     #{player.name} A GAGNÉ ! => LIGNE C ALIGNÉE" 
+        puts "                  "+"~"*40
+        puts "\n[ENTER]"
         gets
         return true
     else
@@ -125,10 +133,12 @@ class Game
   end
 
   # 4
-  def ligne1?(last_boardcase_updated)
+  def ligne1?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a1" || last_boardcase_updated == "b1" || last_boardcase_updated == "c1") && (@board.board_hash["a1"] == @board.board_hash["b1"] && @board.board_hash["a1"] == @board.board_hash["c1"])
-        puts "GAGNÉ ! LIGNE 1" 
-        puts "[ENTER]"
+        puts "                  "+"~"*40
+        puts "                     #{player.name} A GAGNÉ ! => COLONNE 1 ALIGNÉE" 
+        puts "                  "+"~"*40
+        puts "\n[ENTER]"
         gets
         return true
     else
@@ -137,10 +147,12 @@ class Game
   end
 
   # 5
-  def ligne2?(last_boardcase_updated)
+  def ligne2?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a2" || last_boardcase_updated == "b2" || last_boardcase_updated == "c2") && (@board.board_hash["a2"] == @board.board_hash["b2"] && @board.board_hash["a2"] == @board.board_hash["c2"])
-        puts "GAGNÉ ! LIGNE 2" 
-        puts "[ENTER]"
+        puts "                  "+"~"*40
+        puts "                     #{player.name} A GAGNÉ ! => COLONNE 2 ALIGNÉE" 
+        puts "                  "+"~"*40
+        puts "\n[ENTER]"
         gets
         return true
     else
@@ -149,10 +161,12 @@ class Game
   end
 
   # 6
-  def ligne3?(last_boardcase_updated)
+  def ligne3?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a3" || last_boardcase_updated == "b3" || last_boardcase_updated == "c3") && (@board.board_hash["a3"] == @board.board_hash["b3"] && @board.board_hash["a3"] == @board.board_hash["c3"])
-        puts "GAGNÉ ! LIGNE 3" 
-        puts "[ENTER]"
+        puts "                  "+"~"*40
+        puts "                     #{player.name} A GAGNÉ ! => COLONNE 3 ALIGNÉE" 
+        puts "                  "+"~"*40
+        puts "\n[ENTER]"
         gets
         return true
     else
@@ -161,10 +175,12 @@ class Game
   end
 
   # 7
-  def ligneA1?(last_boardcase_updated)
+  def ligneA1?(last_boardcase_updated, player)
     if (last_boardcase_updated == "a1" || last_boardcase_updated == "b2" || last_boardcase_updated == "c3") && (@board.board_hash["a1"] == @board.board_hash["b2"] && @board.board_hash["a1"] == @board.board_hash["c3"])
-        puts "GAGNÉ ! LIGNE A1" 
-        puts "[ENTER]"
+        puts "                  "+"~"*40
+        puts "                     #{player.name} A GAGNÉ ! => DIAGONALE A1-C3 ALIGNÉE" 
+        puts "                  "+"~"*40
+        puts "\n[ENTER]"
         gets
         return true
     else
@@ -173,10 +189,12 @@ class Game
   end
 
   # 8
-  def ligneC1?(last_boardcase_updated)
+  def ligneC1?(last_boardcase_updated, player)
     if (last_boardcase_updated == "c1" || last_boardcase_updated == "b2" || last_boardcase_updated == "a3") && (@board.board_hash["c1"] == @board.board_hash["b2"] && @board.board_hash["c1"] == @board.board_hash["a3"])
-        puts "GAGNÉ ! LIGNE C1" 
-        puts "[ENTER]"
+        puts "                  "+"~"*40
+        puts "                     #{player.name} A GAGNÉ ! => DIAGONALE C1-A3 ALIGNÉE" 
+        puts "                  "+"~"*40
+        puts "\n[ENTER]"
         gets
         return true
     else
