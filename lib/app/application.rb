@@ -26,14 +26,14 @@ class Application
 
     puts "\n\n                **********************************************"
     puts "                **                                          **"
-    puts "                ***     UN MORPION CA GRATTOUILLE ET      ****"
-    puts "                ****    TE SOUHAITE LA BIENVENUE ! :)    *****"
+    puts "                ***     "+"UN MORPION CA GRATTOUILLE ET".light_blue+"      ****"
+    puts "                ****    "+"TE SOUHAITE LA BIENVENUE ! :)".light_blue+"    *****"
     puts "                *****                                   ******"
     puts "                **********************************************"
     puts "\n[ENTER]"
     gets
 
-    puts "                 REGLES DU JEU"
+    puts "                 REGLES DU JEU".light_blue
     puts "               |"
     puts "               | 2 joueurs placent un pion sur la grille chacun leur tour."
     puts "               | Le gagnant est celui qui aligne 3 pions le premier."
@@ -49,8 +49,8 @@ class Application
     
     puts "\n\n                **********************************************"
     puts "                **                                          **"
-    puts "                ***       LE MORPION TE REMERCIE DE       ****"
-    puts "                ****         L'AVOIR GRATTÉ :) !         *****"
+    puts "                ***       "+"LE MORPION TE REMERCIE DE".light_blue+"       ****"
+    puts "                ****         "+"L'AVOIR GRATTÉ :) !".light_blue+"         *****"
     puts "                *****                                   ******"
     puts "                **********************************************"
     puts "\n[ENTER]"

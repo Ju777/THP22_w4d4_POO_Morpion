@@ -10,6 +10,4 @@ require 'app/board'
 require 'app/boardcase'
 require 'app/show'
 
-application = Application.new
-application.start_rounds
-application.good_bye_message
+Application.new

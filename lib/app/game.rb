@@ -36,7 +36,7 @@ class Game
       # Affichage du plateau mis à jour
       Show.new(@board)
       
-      # Y'a-t-il un vainqueur ? Si oui => fin de partie
+      # Y'a-t-il un vainqueur ou match nul ? Si oui => fin de partie
       
       victory = winner?(chosen_boardcase, player1) if player_to_play == 1
       victory = winner?(chosen_boardcase, player2) if player_to_play == 2
@@ -47,7 +47,6 @@ class Game
         puts "=> MATCH NUL !"
         @status = false
       end
-      round += 1
   end
 
   # Méthode qui annonce quel joueur doit jouer
