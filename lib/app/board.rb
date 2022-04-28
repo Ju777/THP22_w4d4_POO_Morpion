@@ -19,4 +19,16 @@ class Board
     @board_hash[boardcase_to_update] = "O" if player == 2    
   end
 
+  def boardcase_status?(boardcase_to_update)
+    if @board_hash[boardcase_to_update] == " "
+      puts "case libre"
+      gets
+      return true
+    else
+      puts "case pas libre"
+      gets
+      return false
+    end
+  end
+
 end

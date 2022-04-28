@@ -1,7 +1,6 @@
 class Application
   attr_accessor :current_game, :player_will
 
-  # Boucle infinie qui s'arrête uniquement si les joueurs décident de ne pas renouveler de partie
   def initialize
     welcome_message
     @player_will = get_player_will 
@@ -12,7 +11,8 @@ class Application
 
       # Création d'une nouvelle partie
       @current_game = Game.new(name_player1, name_player2)
-      puts "Une nouvelle partie commence !! [ENTER]"   
+      puts "Une nouvelle partie commence !!"
+      puts "[ENTER]"
       gets
 
     elsif @player_will == "n"
@@ -20,8 +20,9 @@ class Application
     end
   end
 
+  # Méthode qui souhaite la bienvenue
   def welcome_message
-    # Message de bienvenue
+
     puts "\n\n        **********************************************"
     puts "        **                                          **"
     puts "        ***     UN MORPION CA GRATTOUILLE ET      ****"
@@ -37,18 +38,20 @@ class Application
     gets
   end
 
+  # Méthode qui salue les joueurs quand le programme s'arrête
   def good_bye_message
-    # Message de clôture
+    
     puts "\n\n        **********************************************"
     puts "        **                                          **"
-    puts "        ***     LE MORPION TE REMERCIE DE         ****"
-    puts "        ****          L'AVOIR GRATTÉ :) !        *****"
+    puts "        ***       LE MORPION TE REMERCIE DE       ****"
+    puts "        ****            L'AVOIR GRATTÉ :) !      *****"
     puts "        *****                                   ******"
     puts "        **********************************************"
     puts "\n[ENTER TO QUIT]"
     gets
   end
 
+  # Méthode qui recueille le souhait de l'utilisateur à jouer
   def get_player_will
     print "Nouvelle partie ? 'o' / 'n' > "
     player_answer = gets.chomp
@@ -60,12 +63,13 @@ class Application
     return player_answer
   end
 
+  # Méthode qui demande le nom d'un joueur
   def get_player_name(player_num)
-    # Demande du nom du joueur
     print "Nom du joueur #{player_num} > "
     return gets.chomp
   end
 
+  # Méthode qui lance le premier tour de morpion
   def start_rounds
     round = 1
     while self.current_game.status == true
