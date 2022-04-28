@@ -1,34 +1,35 @@
 class Game
-  attr_accessor :players_array, :board
+  attr_accessor :players_array, :board, :status
 
   def initialize(name_player1, name_player2)
     @players_array = []
     @players_array << Player.new(name_player1)
     @players_array << Player.new(name_player2)
     @board = Board.new
+    @status = true
   end
 
-  def play_rounds
+  def play_round(round)
+    @status = true
     player1 = @players_array[0]
     player2 = @players_array[1]
-    round = 1
 
     # Affichage du plateau de jeu vide
     Show.new(@board)
 
-    while(round <=9)
       # Annonce du round
       puts "Round #{round} !"
 
+      player_to_play = who_s_turn(round) 
       # Annonce du joueur qui doit jouer
-      if who_s_turn(round) == 1
+      if player_to_play == 1
         # Le joueur 1 choisi un case
         boardcase_to_update = player1.choose_a_boardcase
         # La case choisie se met à jour avec une "X"
         @board.board_update(boardcase_to_update, 1)
       end
 
-      if who_s_turn(round) == 2
+      if player_to_play == 2
         # Le joueur 2 choisi un case
         boardcase_to_update = player2.choose_a_boardcase
         # La case choisie se met à jour avec un "O"
@@ -40,17 +41,16 @@ class Game
       
       # Y'a-t-il un vainqueur ? Si oui => message de fin de partie
       victory = winner?(boardcase_to_update)
+
       if victory == true
-        # Message de fin de partie
-        end_game
-        # Provoquer une sortie de la boucle 'for' en passant l'index à sa valeur maximale
-        round = 9
+        @status = false
+        puts "@status devient false"
       elsif victory == false && round == 9
         puts "MATCH NUL !"
-        end_game
+        @status = false
+        puts "@status devient false"
       end
-      round += 1
-    end # Fin de la boucle
+      binding.pry
   end # Fin de la méthode
 
   def who_s_turn(round)

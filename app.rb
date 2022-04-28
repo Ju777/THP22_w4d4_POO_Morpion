@@ -11,22 +11,11 @@ require 'app/boardcase'
 require 'app/show'
 
 
-# Message de bienvenue
-puts "        **********************************************"
-puts "        **                                          **"
-puts "        ***     LE MORPION TE GRATTOUILLE ET      ****"
-puts "        ****    TE SOUHAITE LA BIENVENUE ! :)    *****"
-puts "        *****                                   ******"
-puts "        **********************************************"
-puts "\n[ENTER TO CONTINUE]"
-gets
 
-puts "        REGLES DU JEU"
-puts "     BLABLA BLABLABLABLABLA"
-puts "\n[ENTER TO CONTINUE]"
-gets
 
 application = Application.new
+application.start_rounds
+application.good_bye_message
 
 # SAUVEGARDE DE CE QUI MARCHE !!!
 =begin
@@ -52,11 +41,11 @@ elsif user_choice == "n"
   puts "\n[ENTER TO QUIT]"
   gets
 end
-=end
-# FIN DE SAUVEGARDE DE CE QUI MARCHE !!!
 
 
 # Début des rounds : 9 maxis avant un nul ou une victoire
 application.current_game.play_rounds
+=end
+# FIN DE SAUVEGARDE DE CE QUI MARCHE !!!
 binding.pry
 
