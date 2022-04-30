@@ -19,7 +19,7 @@ class Game
 
       player_to_play = who_s_turn(round)
       print " > "
-      chosen_boardcase = gets.chomp
+      chosen_boardcase = gets.chomp.downcase # Passage en downcase pour éviter un message d'erreur si la saisie est en majuscule (A2, C3, etc.)
 
       # Est-ce une saisie valide ? Si oui, est-ce une case libre ?
       while !bordcase_valid?(chosen_boardcase) || !@board.boardcase_status?(chosen_boardcase)

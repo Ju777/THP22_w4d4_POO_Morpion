@@ -3,14 +3,15 @@ class Application
 
   def initialize
     welcome_message
-    @player_will = get_player_will 
 
-    if @player_will =="o"
-      name_player1 = get_player_name(1)
-      name_player2 = get_player_name(2)
+    while true
+      @player_will = get_player_will
 
-      # Boucle infinie qui relance une nouvelle partie après chaque victoire ou match nul
-      while true
+      case @player_will
+      when "o"
+        name_player1 = get_player_name(1)
+        name_player2 = get_player_name(2)
+
         # Création d'une nouvelle partie
         @current_game = Game.new(name_player1, name_player2)
         puts "                UNE NOUVELLE PARTIE COMMENCE !"
@@ -21,10 +22,14 @@ class Application
           @current_game.play_round(round)
           round += 1
         end
+      
+      when "n"
+        good_bye_message
+        break
+      
+      else
+        print "                o = OUI / n = NON         > "
       end
-
-    elsif @player_will == "n"
-      good_bye_message
     end
   end
 
@@ -59,11 +64,11 @@ class Application
     puts "                ****         "+"L'AVOIR GRATTÉ :) !".light_blue+"         *****"
     puts "                *****                                   ******"
     puts "                **********************************************"
-    puts "\n[ENTER]"
-    gets
+    puts "\n\n"
+
   end
 
-  # Méthode qui recueille le souhait de l'utilisateur à jouer
+  # Méthode qui recueille si l'utilisateur veut jouer ou non
   def get_player_will
     print "                Lancer une partie ? o / n > "
     player_answer = gets.chomp
